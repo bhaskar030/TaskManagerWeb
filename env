@@ -1,0 +1,2 @@
+SECRET_KEY='813f2ebd932590cc20d1c4f6083f4c6f3e8668f0bbe86f319c5d4053083a7c3c'
+CUSTOMCONNSTR='Driver={ODBC Driver 18 for SQL Server};Server=tcp:seo-manager-sql-server.database.windows.net,1433;Database=seo-manager-db;Uid=admin_user;Pwd=System_32;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
