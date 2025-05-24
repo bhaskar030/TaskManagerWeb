@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SEO Manager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <h1>SEO Manager</h1>
+
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="flash {{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Input Form -->
+  <form method="POST" action="{{ url_for('pages.seo_manager') }}">
+    <label for="prompt">Prompt:</label><br />
+    <textarea name="prompt" id="prompt" rows="4" cols="80" placeholder="Enter prompt here...">{{ prompt or '' }}</textarea><br /><br />
+
+    <label for="text">Text:</label><br />
+    <textarea name="text" id="text" rows="10" cols="80" placeholder="Enter text here...">{{ text or '' }}</textarea><br /><br />
+
+    <button type="submit">Analyze</button>
+  </form>
+
+  <!-- Display results only if analysis has been done -->
+  {% if chat %}
+  <hr />
+  <h2>Analysis Results</h2>
+
+  <h3>Processed Text:</h3>
+  <p>{{ chat }}</p>
+
+  <h3>Sentiment Analysis:</h3>
+  <p>
+    The sentiment for entire document: 
+    Score = {{ overall_sentiment.score }}, 
+    Magnitude = {{ overall_sentiment.magnitude }}
+  </p>
+  
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Sentence</th>
+        <th>Score</th>
+        <th>Magnitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sentence, values in sentence_sentiments.items() %}
+      <tr>
+        <td>{{ sentence }}</td>
+        <td>{{ values.score }}</td>
+        <td>{{ values.magnitude }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="3">No sentence-level sentiment data available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Detected Genres</h3>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Genre</th>
+        <th>Confidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for name, confidence in genre %}
+      <tr>
+        <td>{{ name }}</td>
+        <td>{{ confidence }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="2">No genre detected.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Grade Level:</h3>
+  <p>{{ grade }}</p>
+
+  <h3>Named Entities</h3>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Entity</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entity, label in ner %}
+      <tr>
+        <td>{{ entity }}</td>
+        <td>{{ label }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="2">No named entities detected.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endif %}
+</body>
+</html>

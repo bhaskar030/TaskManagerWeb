@@ -1,0 +1,14 @@
+Flask==2.3.2
+requests
+transformers
+numpy==1.21.0
+textstat
+torch
+bcrypt
+pyodbc
+python-dotenv
+gunicorn
+PyJWT
+flask_cors
+flask_wtf
+google-cloud-language

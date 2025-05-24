@@ -1,0 +1,79 @@
+/* General styling */
+body {
+    background: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Card-like form styling */
+.container {
+    max-width: 900px;
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Textareas and inputs */
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    transition: border 0.2s ease-in-out;
+}
+
+textarea:focus,
+input:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+/* Buttons */
+button,
+.btn {
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+}
+
+button:hover,
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Flash messages */
+.alert {
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Headings */
+h2, h3, h4 {
+    color: #0d6efd;
+    margin-top: 20px;
+}
+
+/* Read-only output area */
+textarea[readonly] {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+}

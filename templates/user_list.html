@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Manage Users{% endblock %}
+{% block content %}
+<h2>User Management</h2>
+<a href="{{ url_for('pages.create_user_pg') }}" class="btn btn-primary mb-3">Create New User</a>
+<table class="table table-bordered">
+  <thead>
+    <tr><th>Username</th><th>Access</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.username }}</td>
+      <td>{{ u.access }}</td>
+      <td>
+        <a href="{{ url_for('pages.change_access_pg', username=u.username) }}" class="btn btn-info btn-sm">Change Access</a>
+        {% if u.username!=session.username %}
+        <form method="post" action="{{ url_for('pages.delete_user_pg', username=u.username) }}"
+              style="display:inline;" onsubmit="return confirm('Delete {{u.username}}?');">
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
